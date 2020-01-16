@@ -1,0 +1,46 @@
+
+FOR SU , DO "SUDO SU", not just SU
+
+Docker Change Default Drive:
+https://stackoverflow.com/questions/32070113/how-do-i-change-the-default-docker-container-location
+
+
+To start Docker with Jupyter root access, run the following in SU mode
+docker run -it --rm -p 8888:8888 -e GRANT_SUDO=yes --user root jupyter/datascience-notebook
+
+Rename the container for future quick retreival:
+
+################################################################
+TO RUN Existing Docer in ROOT use: 
+$ docker exec -u 0 -it <container-name> sh
+################################################################
+
+TO get Pyodbc:
+Install :
+apt-get update
+sudo apt-get install unixodbc-dev
+apt-get install pyodbc
+(or)
+conda install pyodbc
+
+If doesn't work try the following:
+sudo su 
+curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+curl https://packages.microsoft.com/config/ubuntu/18.10/prod.list > /etc/apt/sources.list.d/mssql-release.list
+exit
+sudo apt-get update
+sudo ACCEPT_EULA=Y apt-get install msodbcsql17
+echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
+echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+source ~/.bashrc
+
+ANd then restart the jupyter kernel
+
+If Not, try the follwoing:
+sudo apt-get update
+ACCEPT_EULA=Y sudo apt-get -y install msodbcsql17 mssql-tools
+echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile \
+echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc \
+sudo apt-get -y install unixodbc libc6 libstdc++6 libkrb5-3 libcurl3 openssl debconf unixodbc unixodbc-dev
+
+Restart kernel 
