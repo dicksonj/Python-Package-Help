@@ -1,0 +1,12 @@
+SQL JDBC in  EMR
+
+Download driver from : https://docs.microsoft.com/en-us/sql/connect/jdbc/download-microsoft-jdbc-driver-for-sql-server?view=sql-server-ver15
+
+Copy mssql-jdbc-8.2.0.jre8 to EMR instance (eg:./)
+
+sudo nano /etc/spark/conf/spark-defaults.conf
+
+add the downloaded driver path to : spark.driver.extraClassPath and spark.executor.extraClassPath
+
+Restart Kernel!
+
